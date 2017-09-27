@@ -101,9 +101,9 @@ class GA_Popular_Posts_Widget extends WP_Widget {
                         $avatar = '<img src="'.$image[0].'" width="55" class="avatar avatar-32 photo avatar-default">';
                         $avatar .= '<!-- post thumb '.$avatar.' -->';
                     } else $avatar = '<img src="'.__GAPP_DEFAULT_THUMB__.'" width="55" class="avatar avatar-32 photo avatar-default">';
-                    echo '<a href="'.$permalink.'" title="'.esc_attr($title).'" target="_self">'.$avatar.'</a>';
+                    echo '<a class="gappThumb" href="'.$permalink.'" title="'.esc_attr($title).'" target="_self">'.$avatar.'</a>';
                 }
-                echo '<a href="'.$permalink.'" title="'.$title.'" target="_self">'.$title.'</a>';
+                echo '<a class="gappTitle" href="'.$permalink.'" title="'.$title.'" target="_self">'.$title.'</a>';
                 if($instance['stats_tag']){
                     $stats = array();
                     if ($instance['stats_tag']['date']['active']) {

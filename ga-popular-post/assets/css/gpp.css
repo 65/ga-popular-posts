@@ -11,6 +11,10 @@
     margin: 0 14px 0 0;
     padding: 0;
 }
+a.gappTitle {
+    padding-left: 69px;
+    display: block;
+}
 .ga_pp_list .post-stats {
     margin-top: 2px;
     display: block;
