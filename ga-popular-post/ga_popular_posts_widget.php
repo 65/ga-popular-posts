@@ -34,12 +34,12 @@ class GA_Popular_Posts_Widget extends WP_Widget {
             ? 'F j, Y'
             : $instance['stats_tag']['date']['format'];
 
-        /*require_once GA_FUNC_PATH . '/lib/google-api-php-client-2.2.0/vendor/autoload.php';
+        /*require_once GAPP_FUNC_PATH . '/lib/google-api-php-client-2.2.0/vendor/autoload.php';
         $analytics = $this->initializeAnalytics();
         $results = $this->getResults($analytics, '38278839', $maxResults, $timeRange);*/
 
         $postIDs = array();
-        if( ($handle = fopen(GA_FUNC_PATH.'/ga_pp.csv', 'r')) !== false ){
+        if( ($handle = fopen(GAPP_FUNC_PATH.'/ga_pp.csv', 'r')) !== false ){
             while( ($data = fgetcsv($handle, 10000, ',')) !== false )
                 $postIDs[] = $data;
         } else {

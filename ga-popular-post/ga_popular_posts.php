@@ -28,13 +28,13 @@ class GA__Popular_Posts {
         add_filter( 'upload_mimes', array($this,'gapp_mimes_types'));
     }
     protected function constants() {
-        define( 'GA_FUNC_PATH', plugin_dir_path( __FILE__ ) );
+        define( 'GAPP_FUNC_PATH', plugin_dir_path( __FILE__ ) );
         define( '__GAPP_URL__', plugin_dir_url( __FILE__ ) );
         define('__GAPP_DEFAULT_THUMB__',__GAPP_URL__.'/no_thumb.jpg');
     }
 
     function _load_widgets(){
-        require_once GA_FUNC_PATH.'/ga_popular_posts_widget.php';
+        require_once GAPP_FUNC_PATH.'/ga_popular_posts_widget.php';
         register_widget( 'GA_Popular_Posts_Widget' );
     }
     function _enqueue_scripts(){
@@ -50,7 +50,7 @@ class GA__Popular_Posts {
         else $viewID = '38278839';
         $keyFile = get_option('gapp_key_file');
         if( $viewID && $keyFile ){
-            require_once GA_FUNC_PATH . '/lib/google-api-php-client-2.2.0/vendor/autoload.php';
+            require_once GAPP_FUNC_PATH . '/lib/google-api-php-client-2.2.0/vendor/autoload.php';
             $analytics = $this->initializeAnalytics($keyFile);
             $results = $this->getResults($analytics, $viewID, 40, '60daysAgo');
             $postIDs = array();
@@ -62,8 +62,9 @@ class GA__Popular_Posts {
                     $postIDs[] = array($postID);
                 }
             }
+            $postIDs = array_unique($postIDs);
             //var_dump($postIDs);die();
-            if( ($handle = fopen(GA_FUNC_PATH.'/ga_pp.csv', 'w')) !== FALSE ){
+            if( ($handle = fopen(GAPP_FUNC_PATH.'/ga_pp.csv', 'w')) !== FALSE ){
                 foreach( $postIDs as $ID ) fputcsv( $handle, $ID);
             }
             fclose($handle);
