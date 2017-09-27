@@ -53,17 +53,21 @@ class GA__Popular_Posts {
             require_once GAPP_FUNC_PATH . '/lib/google-api-php-client-2.2.0/vendor/autoload.php';
             $analytics = $this->initializeAnalytics($keyFile);
             $results = $this->getResults($analytics, $viewID, 40, '60daysAgo');
-            $postIDs = array();
+            $_postIDs = array();
             if (count($results->getRows()) > 0) {
                 $rows = $results->getRows();
                 foreach($rows as $row) {
                     $postID = url_to_postid($row[1]);
                     if (!$postID) continue;
-                    $postIDs[] = array($postID);
+                    $_postIDs[] = $postID;
                 }
             }
-            $postIDs = array_unique($postIDs);
-            //var_dump($postIDs);die();
+            $_postIDs = array_unique($_postIDs);
+            $postIDs = array();
+            foreach ($_postIDs as $_postID) $postIDs[] = array($_postID);
+            /*echo '<pre>';
+            print_r($postIDs);
+            echo '</pre>';*/
             if( ($handle = fopen(GAPP_FUNC_PATH.'/gapp.csv', 'w')) !== FALSE ){
                 foreach( $postIDs as $ID ) fputcsv( $handle, $ID);
             }
