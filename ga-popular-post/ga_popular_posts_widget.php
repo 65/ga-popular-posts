@@ -39,7 +39,7 @@ class GA_Popular_Posts_Widget extends WP_Widget {
         $results = $this->getResults($analytics, '38278839', $maxResults, $timeRange);*/
 
         $postIDs = array();
-        if( ($handle = fopen(GAPP_FUNC_PATH.'/ga_pp.csv', 'r')) !== false ){
+        if( ($handle = fopen(GAPP_FUNC_PATH.'/gapp.csv', 'r')) !== false ){
             while( ($data = fgetcsv($handle, 10000, ',')) !== false )
                 $postIDs[] = $data;
         } else {
@@ -204,7 +204,7 @@ class GA_Popular_Posts_Widget extends WP_Widget {
         return $instance;
     }
     function initializeAnalytics($keyFile){
-        //$KEY_FILE_LOCATION = AP_FUNC_PATH . '/lib/GA_API-eae4129237e4.json';
+        //$KEY_FILE_LOCATION = GAPP_FUNC_PATH . '/lib/GA_API-eae4129237e4.json';
         $KEY_FILE_LOCATION = $keyFile;
 
         // Create and configure a new client object.

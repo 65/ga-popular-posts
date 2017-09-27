@@ -38,7 +38,7 @@ class GA__Popular_Posts {
         register_widget( 'GA_Popular_Posts_Widget' );
     }
     function _enqueue_scripts(){
-        wp_enqueue_style( 'ga_pp_css', plugins_url( 'assets/css/gpp.css' , __FILE__ ) );
+        wp_enqueue_style( 'gapp_css', plugins_url( 'assets/css/gpp.css' , __FILE__ ) );
     }
     function _install(){
         wp_clear_scheduled_hook( 'ga_popular_posts_event' );
@@ -64,14 +64,14 @@ class GA__Popular_Posts {
             }
             $postIDs = array_unique($postIDs);
             //var_dump($postIDs);die();
-            if( ($handle = fopen(GAPP_FUNC_PATH.'/ga_pp.csv', 'w')) !== FALSE ){
+            if( ($handle = fopen(GAPP_FUNC_PATH.'/gapp.csv', 'w')) !== FALSE ){
                 foreach( $postIDs as $ID ) fputcsv( $handle, $ID);
             }
             fclose($handle);
         }
     }
     function initializeAnalytics($keyFile){
-        //$KEY_FILE_LOCATION = AP_FUNC_PATH . '/lib/GA_API-eae4129237e4.json';
+        //$KEY_FILE_LOCATION = GAPP_FUNC_PATH . '/lib/GA_API-eae4129237e4.json';
         $KEY_FILE_LOCATION = $keyFile;
 
         // Create and configure a new client object.
