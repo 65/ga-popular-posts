@@ -1,0 +1,21 @@
+
+.ga_pp_list li {
+    overflow: hidden;
+    float: none;
+    clear: both;
+}
+.ga_pp_list li img {
+    float: left;
+    display: inline;
+    border: none;
+    margin: 0 14px 0 0;
+    padding: 0;
+}
+.ga_pp_list .post-stats {
+    margin-top: 2px;
+    display: block;
+    padding-left: 69px;
+    font-family: 'Arial', sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+}
