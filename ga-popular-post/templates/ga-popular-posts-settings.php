@@ -43,7 +43,7 @@
                     <th scope="row"><label for="key_file">Credentials Key File</label></th>
                     <td>
                         <?php if(get_option('gapp_key_file')) {
-                            echo get_option('gapp_key_file').'<br><br>';
+                            echo basename(get_option('gapp_key_file')).'<br><br>';
                             echo '<span>Choose another key file:</span>';
                         }
                         ?>
