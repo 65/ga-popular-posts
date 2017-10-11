@@ -1,21 +1,23 @@
 
-.ga_pp_list li {
+.ga_popular_posts .gapp_list {list-style: none;}
+.gapp_list li {
     overflow: hidden;
     float: none;
     clear: both;
 }
-.ga_pp_list li img {
+.gapp_list li img {
     float: left;
     display: inline;
     border: none;
     margin: 0 14px 0 0;
     padding: 0;
 }
-a.gappTitle {
+.gappTitle {
     padding-left: 69px;
     display: block;
 }
-.ga_pp_list .post-stats {
+.gapp_list.noThumbnail .gappTitle {padding-left: 0;}
+.gapp_list .post-stats {
     margin-top: 2px;
     display: block;
     padding-left: 69px;
@@ -23,3 +25,4 @@ a.gappTitle {
     font-size: 12px;
     font-weight: normal;
 }
+.gapp_list.noThumbnail .post-stats {padding-left: 0;}

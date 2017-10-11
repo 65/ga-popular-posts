@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: KHANH
- * Date: 8/17/2017
- * Time: 4:11 PM
- */
 
 class GA_Popular_Posts_Widget extends WP_Widget {
     public $text_domain = 'ga_popular_posts';
@@ -13,7 +7,7 @@ class GA_Popular_Posts_Widget extends WP_Widget {
         parent::__construct(
             'ga_popular_posts_w', // Base ID
             __('GA Popular Posts Widget', $this->text_domain), // Name
-            array('classname' => 'av_ga_popular_posts', 'description' => __( 'Get popular posts from Google Analytics.', $this->text_domain ), ) // Args
+            array('classname' => 'ga_popular_posts', 'description' => __( 'Get popular posts from Google Analytics.', $this->text_domain ), ) // Args
         );
     }
     function widget($args, $instance){
@@ -34,10 +28,6 @@ class GA_Popular_Posts_Widget extends WP_Widget {
             ? 'F j, Y'
             : $instance['stats_tag']['date']['format'];
 
-        /*require_once GAPP_FUNC_PATH . '/lib/google-api-php-client-2.2.0/vendor/autoload.php';
-        $analytics = $this->initializeAnalytics();
-        $results = $this->getResults($analytics, '38278839', $maxResults, $timeRange);*/
-
         $postIDs = array();
         if( ($handle = fopen(GAPP_FUNC_PATH.'/gapp.csv', 'r')) !== false ){
             while( ($data = fgetcsv($handle, 10000, ',')) !== false )
@@ -47,11 +37,10 @@ class GA_Popular_Posts_Widget extends WP_Widget {
             return;
         }
         fclose($handle);
-        /*echo '<pre>';
-        print_r($postIDs);
-        echo '</pre>';*/
         if(count($postIDs) > 0){
-            echo '<ul class="ga_pp_list">';
+            if($instance['thumbnail']['active']) $class = '';
+            else $class = 'noThumbnail';
+            echo '<ul class="gapp_list '.$class.'">';
             $i = 0;
             $t = 0;
             foreach($postIDs as $ID){
@@ -104,7 +93,7 @@ class GA_Popular_Posts_Widget extends WP_Widget {
                     echo '<a class="gappThumb" href="'.$permalink.'" title="'.esc_attr($title).'" target="_self">'.$avatar.'</a>';
                 }
                 echo '<a class="gappTitle" href="'.$permalink.'" title="'.$title.'" target="_self">'.$title.'</a>';
-                if($instance['stats_tag']){
+                if($instance['stats_tag'] && $instance['stats_tag']['date']['active']){
                     $stats = array();
                     if ($instance['stats_tag']['date']['active']) {
                         $date = get_the_date($instance['stats_tag']['date']['format'], $postID);
@@ -164,11 +153,11 @@ class GA_Popular_Posts_Widget extends WP_Widget {
         </p>
         <label for="<?php echo $this->get_field_id( 'post_type' ); ?>"><?php _e('Post type(s)', ''); ?>:</label> <small>[<a href="https://github.com/cabrerahector/wordpress-popular-posts/wiki/5.-FAQ#what-is-post-type-for" title="<?php _e('What is this?', ''); ?>" target="_blank">?</a>]</small>
         <input type="text" id="<?php echo $this->get_field_id( 'post_type' ); ?>" name="<?php echo $this->get_field_name( 'post_type' ); ?>" value="<?php echo $instance['post_type']; ?>" class="widefat" /><br /><br />
+        <hr />
         <p>
             <input type="checkbox" class="checkbox" <?php echo ($instance['thumbnail']['active']) ? 'checked="checked"' : ''; ?> id="<?php echo $this->get_field_id( 'thumbnail-active' ); ?>" name="<?php echo $this->get_field_name( 'thumbnail-active' ); ?>" />
             <label for="<?php echo $this->get_field_id( 'thumbnail-active' ); ?>"><?php _e('Display post thumbnail'); ?></label>
         </p>
-        <hr />
         <p>
             <input type="checkbox" class="checkbox" <?php echo ($instance['stats_tag']['date']['active']) ? 'checked="checked"' : '';?> id="<?php echo $this->get_field_id('date'); ?>" name="<?php echo $this->get_field_name('date');?>" />
             <label for="<?php echo $this->get_field_id( 'date' ); ?>"><?php _e('Display date',$this->text_domain); ?></label><br />
@@ -196,6 +185,7 @@ class GA_Popular_Posts_Widget extends WP_Widget {
         $instance['thumbnail']['active'] = false;
         $instance['thumbnail']['active'] = isset( $new_instance['thumbnail-active'] );
 
+        $instance['stats_tag']['date']['active'] = false;
         $instance['stats_tag']['date']['active'] = isset( $new_instance['date'] );
         $instance['stats_tag']['date']['format'] = empty($new_instance['date_format'])
             ? 'F j, Y'
