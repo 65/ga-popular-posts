@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: KHANH
- * Date: 8/31/2017
- * Time: 3:41 PM
- */
 ?>
 <div class="wrap">
     <h2><?php _e( "GA Popular Posts Settings" ); ?></h2>

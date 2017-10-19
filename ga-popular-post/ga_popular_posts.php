@@ -47,7 +47,7 @@ class GA__Popular_Posts {
     function ga_popular_posts_event_func(){
         $data = get_option( 'gapp_settings');
         if(isset( $data['ga_view_id']) && $data['ga_view_id']) $viewID = $data['ga_view_id'];
-        else $viewID = '38278839';
+        else $viewID = '';
         $keyFile = get_option('gapp_key_file');
         if( $viewID && $keyFile ){
             require_once GAPP_FUNC_PATH . '/lib/google-api-php-client-2.2.0/vendor/autoload.php';
