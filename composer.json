@@ -1,5 +1,5 @@
 {
-    "name": "sixfive/ga-popular-post",
+    "name": "sixfive/ga-popular-posts",
     "type": "wordpress-plugin",
     "require": {
         "composer/installers": "^1.0"
