@@ -1,22 +1,39 @@
 
 .ga_popular_posts .gapp_list {list-style: none;}
-.gapp_list li {
+.gapp_list .gappItem {
     overflow: hidden;
     float: none;
     clear: both;
+    margin-bottom: 16px;
 }
-.gapp_list li img {
+.gappItem + .gappItem {
+}
+.gapp_list .gappItem img {
     float: left;
     display: inline;
     border: none;
     margin: 0 14px 0 0;
     padding: 0;
 }
+.widget .gappItem .postCat {
+    margin-top: 4px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
 .gappTitle {
     padding-left: 69px;
     display: block;
 }
 .gapp_list.noThumbnail .gappTitle {padding-left: 0;}
+.gappItem .postExcerpt {
+    margin-top: 4px;
+    margin-bottom: 14px;
+    font-size: 14px;
+    line-height: 18px;
+}
+.gappItem .postMeta {
+    margin-bottom: 0;
+}
 .gapp_list .post-stats {
     margin-top: 2px;
     display: block;

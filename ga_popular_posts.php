@@ -52,7 +52,7 @@ class GA__Popular_Posts {
         if( $viewID && $keyFile ){
             require_once GAPP_FUNC_PATH . '/lib/google-api-php-client-2.2.0/vendor/autoload.php';
             $analytics = $this->initializeAnalytics($keyFile);
-            $results = $this->getResults($analytics, $viewID, 40, '60daysAgo');
+            $results = $this->getResults($analytics, $viewID, 100, '60daysAgo');
             $_postIDs = array();
             if (count($results->getRows()) > 0) {
                 $rows = $results->getRows();
